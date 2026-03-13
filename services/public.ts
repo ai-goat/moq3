@@ -157,6 +157,10 @@ const getCachedExams = unstable_cache(queryAllExams, ["platform-data"], {
 });
 
 export async function getAllExams() {
+  if (process.env.NODE_ENV !== "production") {
+    return queryAllExams();
+  }
+
   return getCachedExams();
 }
 
