@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Exam {
+  id              String     @id @default(cuid())
+  name            String
+  slug            String     @unique
+  conductingBody  String     @map("conducting_body")
+  category        String
+  officialWebsite String     @map("official_website")
+  description     String     @db.Text
+  createdAt       DateTime   @default(now()) @map("created_at")
+  updatedAt       DateTime   @updatedAt @map("updated_at")
+  results         Result[]
+  cutoffs         Cutoff[]
+  stats           ExamStat[]
+  contents        Content[]
+  updates         ExamUpdate[]
+
+  @@index([category])
+  @@index([createdAt])
+  @@map("exams")
+}
+
+model Result {
+  id                 String   @id @default(cuid())
+  examId             String   @map("exam_id")
+  year               Int
+  resultDate         DateTime @map("result_date")
+  officialResultLink String   @map("official_result_link")
+  status             String
+  totalCandidates    Int      @map("total_candidates")
+  selectedCandidates Int      @map("selected_candidates")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+  exam               Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, year])
+  @@index([year, status])
+  @@map("results")
+}
+
+model Cutoff {
+  id          String   @id @default(cuid())
+  examId      String   @map("exam_id")
+  year        Int
+  category    String
+  cutoffMarks Float    @map("cutoff_marks")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, year, category])
+  @@index([year, category])
+  @@map("cutoffs")
+}
+
+model ExamStat {
+  id             String   @id @default(cuid())
+  examId         String   @map("exam_id")
+  year           Int
+  vacancies      Int
+  candidates     Int
+  selectionRatio Float    @map("selection_ratio")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  exam           Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, year])
+  @@index([year])
+  @@map("exam_stats")
+}
+
+model Content {
+  id          String   @id @default(cuid())
+  examId      String   @map("exam_id")
+  contentType String   @map("content_type")
+  body        String   @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, contentType])
+  @@index([contentType])
+  @@map("content")
+}
+
+model ExamUpdate {
+  id           String    @id @default(cuid())
+  examId       String    @map("exam_id")
+  year         Int
+  updateType   String    @map("update_type")
+  title        String
+  updateDate   DateTime? @map("update_date")
+  officialLink String    @map("official_link")
+  status       String
+  body         String    @db.Text
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  exam         Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@index([examId, year])
+  @@index([updateType, status])
+  @@map("exam_updates")
+}

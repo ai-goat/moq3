@@ -1,0 +1,117 @@
+export const adminForms = [
+  {
+    action: "/api/admin/exams",
+    description: "Create or update exam metadata and core SEO fields.",
+    fields: [
+      { label: "Exam Name", name: "name", type: "text", placeholder: "SSC MTS" },
+      { label: "Slug", name: "slug", type: "text", placeholder: "ssc-mts" },
+      { label: "Category", name: "category", type: "text", placeholder: "SSC" },
+      {
+        label: "Conducting Body",
+        name: "conductingBody",
+        type: "text",
+        placeholder: "Staff Selection Commission",
+      },
+      {
+        label: "Official Website",
+        name: "officialWebsite",
+        type: "url",
+        placeholder: "https://ssc.gov.in",
+      },
+      {
+        label: "Description",
+        name: "description",
+        type: "textarea",
+        placeholder: "SEO-ready description for the exam page.",
+      },
+    ],
+    title: "Add Exam",
+  },
+  {
+    action: "/api/admin/results",
+    description: "Add result announcements and trigger ISR updates.",
+    fields: [
+      { label: "Exam Slug", name: "examSlug", type: "text", placeholder: "ssc-mts" },
+      { label: "Year", name: "year", type: "number", placeholder: "2026" },
+      {
+        label: "Result Date",
+        name: "resultDate",
+        type: "datetime-local",
+        placeholder: "",
+      },
+      {
+        label: "Official Link",
+        name: "officialResultLink",
+        type: "url",
+        placeholder: "https://ssc.gov.in",
+      },
+      { label: "Status", name: "status", type: "text", placeholder: "expected" },
+      {
+        label: "Total Candidates",
+        name: "totalCandidates",
+        type: "number",
+        placeholder: "1980000",
+      },
+      {
+        label: "Selected Candidates",
+        name: "selectedCandidates",
+        type: "number",
+        placeholder: "13600",
+      },
+    ],
+    title: "Add Result",
+  },
+  {
+    action: "/api/admin/cutoffs",
+    description: "Store category-wise cutoff records for year pages.",
+    fields: [
+      { label: "Exam Slug", name: "examSlug", type: "text", placeholder: "ssc-mts" },
+      { label: "Year", name: "year", type: "number", placeholder: "2026" },
+      { label: "Category", name: "category", type: "text", placeholder: "General" },
+      {
+        label: "Cutoff Marks",
+        name: "cutoffMarks",
+        type: "number",
+        placeholder: "151",
+      },
+    ],
+    title: "Add Cutoff",
+  },
+  {
+    action: "/api/admin/stats",
+    description: "Update annual vacancy and selection statistics.",
+    fields: [
+      { label: "Exam Slug", name: "examSlug", type: "text", placeholder: "ssc-mts" },
+      { label: "Year", name: "year", type: "number", placeholder: "2026" },
+      { label: "Vacancies", name: "vacancies", type: "number", placeholder: "13600" },
+      {
+        label: "Candidates",
+        name: "candidates",
+        type: "number",
+        placeholder: "1980000",
+      },
+      {
+        label: "Selection Ratio",
+        name: "selectionRatio",
+        type: "number",
+        placeholder: "0.69",
+      },
+    ],
+    title: "Update Stats",
+  },
+  {
+    action: "/api/admin/updates",
+    description: "Add answer key, admit card, result, and notice updates for an exam cycle.",
+    fields: [
+      { label: "Exam Slug", name: "examSlug", type: "text", placeholder: "ssc-mts-havaldar" },
+      { label: "Year", name: "year", type: "number", placeholder: "2026" },
+      { label: "Update Type", name: "updateType", type: "text", placeholder: "answer-key" },
+      { label: "Title", name: "title", type: "text", placeholder: "SSC MTS / Havaldar Answer Key 2026 Out" },
+      { label: "Update Date", name: "updateDate", type: "datetime-local", placeholder: "" },
+      { label: "Official Link", name: "officialLink", type: "url", placeholder: "https://ssc.gov.in" },
+      { label: "Status", name: "status", type: "text", placeholder: "published" },
+      { label: "Body", name: "body", type: "textarea", placeholder: "Short operational summary for this update." },
+    ],
+    title: "Add Update",
+  },
+];
