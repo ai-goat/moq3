@@ -66,12 +66,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const seoRoutes = collections.seoParams.map((item) => ({
-    url: `${base}/${item.seoSlug}`,
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }));
-
   return [
     ...staticRoutes,
     ...examRoutes,
@@ -82,6 +76,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...notificationRoutes,
     ...cutoffCategoryRoutes,
     ...analysisRoutes,
-    ...seoRoutes,
   ];
 }
