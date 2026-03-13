@@ -27,6 +27,9 @@ export async function generateMetadata({
   return {
     title: seoSlug.replace(/-/g, " "),
     description: `${data.exam.name} SEO landing page for organic discovery and internal routing.`,
+    alternates: {
+      canonical: `/${seoSlug}`,
+    },
   };
 }
 

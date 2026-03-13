@@ -29,6 +29,9 @@ export async function generateMetadata({
   return {
     title: `${data.exam.name} Result ${data.year}`,
     description: `${data.exam.name} result ${data.year} with direct link, result date, selection stats, and cutoff comparison.`,
+    alternates: {
+      canonical: `/result/${pageSlug}`,
+    },
   };
 }
 

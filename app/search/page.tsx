@@ -8,6 +8,9 @@ import { getHomepageData } from "@/services/public";
 export const metadata: Metadata = {
   title: "Search Exams",
   description: "Instant exam search backed by Meilisearch with fallback search support.",
+  alternates: {
+    canonical: "/search",
+  },
 };
 
 export const revalidate = 3600;

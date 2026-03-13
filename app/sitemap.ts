@@ -12,7 +12,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/exams",
     "/exam-calendar",
     "/search",
-    "/admin",
   ].map((route) => ({
     url: `${base}${route || "/"}`,
     changeFrequency: "daily" as const,

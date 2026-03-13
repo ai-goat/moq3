@@ -29,6 +29,9 @@ export async function generateMetadata({
   return {
     title: `${data.exam.name} Answer Key ${data.year}`,
     description: `${data.exam.name} answer key ${data.year} with direct official link, dates, and how to check details.`,
+    alternates: {
+      canonical: `/answer-key/${pageSlug}`,
+    },
   };
 }
 

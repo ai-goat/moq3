@@ -32,6 +32,9 @@ export async function generateMetadata({
   return {
     title: `${data.exam.name} Analysis`,
     description: `${data.exam.name} selection ratio, marks vs rank, historical results, and cutoff analytics.`,
+    alternates: {
+      canonical: `/analysis/${data.exam.slug}`,
+    },
   };
 }
 

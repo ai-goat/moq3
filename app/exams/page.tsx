@@ -8,6 +8,9 @@ import { getExamDirectory } from "@/services/public";
 export const metadata: Metadata = {
   title: "All Exams",
   description: "Explore all tracked exams, results, cutoffs, and analysis pages.",
+  alternates: {
+    canonical: "/exams",
+  },
 };
 
 export const revalidate = 3600;

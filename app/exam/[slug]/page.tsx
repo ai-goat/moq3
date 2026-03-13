@@ -463,6 +463,9 @@ export async function generateMetadata({
   return {
     title: `${exam.name} Result, Cutoff, Analysis`,
     description: exam.description,
+    alternates: {
+      canonical: `/exam/${exam.slug}`,
+    },
   };
 }
 

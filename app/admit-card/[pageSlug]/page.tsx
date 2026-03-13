@@ -29,6 +29,9 @@ export async function generateMetadata({
   return {
     title: `${data.exam.name} Admit Card ${data.year}`,
     description: `${data.exam.name} admit card ${data.year} with important dates, official link, and exam-cycle details.`,
+    alternates: {
+      canonical: `/admit-card/${pageSlug}`,
+    },
   };
 }
 

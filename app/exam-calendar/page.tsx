@@ -9,6 +9,9 @@ import { getExamCalendarData } from "@/services/public";
 export const metadata: Metadata = {
   title: "Exam Calendar",
   description: "Upcoming result declaration calendar for tracked exams.",
+  alternates: {
+    canonical: "/exam-calendar",
+  },
 };
 
 export const revalidate = 3600;

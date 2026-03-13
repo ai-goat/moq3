@@ -31,6 +31,9 @@ export async function generateMetadata({
   return {
     title: `${data.exam.name} ${data.year} ${data.category} Cutoff`,
     description: `${data.exam.name} ${data.year} ${data.category} cutoff with historical year comparison.`,
+    alternates: {
+      canonical: `/cutoffs/${examYear}/${category}`,
+    },
   };
 }
 

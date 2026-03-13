@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 
 import { SearchBox } from "@/components/search/search-box";
 import { ResultStatusPill } from "@/components/ui/result-status-pill";
@@ -8,6 +9,12 @@ import { StructuredData } from "@/components/ui/structured-data";
 import { buildOrganizationJsonLd } from "@/lib/json-ld";
 import { buildIntentPageHref, formatCompactDate, formatNumber } from "@/lib/utils";
 import { getHomepageData } from "@/services/public";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function HomePage() {
   const data = await getHomepageData();

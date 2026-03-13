@@ -29,6 +29,9 @@ export async function generateMetadata({
   return {
     title: `${data.exam.name} Notification ${data.year}`,
     description: `${data.exam.name} notification ${data.year} with important dates, fee, eligibility, vacancy, and official links.`,
+    alternates: {
+      canonical: `/notification/${pageSlug}`,
+    },
   };
 }
 
