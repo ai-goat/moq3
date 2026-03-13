@@ -1,3 +1,6 @@
+import { config } from "dotenv";
+
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 
 import {
@@ -9,7 +12,18 @@ import {
   demoUpdates,
 } from "@/lib/demo-data";
 
-const prisma = new PrismaClient();
+config({ path: ".env.local" });
+config();
+
+const databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+  throw new Error("DATABASE_URL is required to run prisma seed.");
+}
+
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: databaseUrl }),
+});
 
 async function main() {
   for (const exam of demoExams) {
