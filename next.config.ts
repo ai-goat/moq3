@@ -6,6 +6,20 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [],
   },
+  async redirects() {
+    return [
+      {
+        source: "/results/:examYear",
+        destination: "/result/:examYear",
+        permanent: true,
+      },
+      {
+        source: "/cutoffs/:examYear",
+        destination: "/cutoff/:examYear",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
