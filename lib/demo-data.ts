@@ -7,6 +7,7 @@ import type {
   ExamStat,
   Result,
 } from "@/types/domain";
+import { rrbGroupDRegionalCutoffArchive } from "@/lib/imported-content";
 
 const now = new Date("2026-03-13T00:00:00.000Z").toISOString();
 
@@ -449,6 +450,13 @@ export const demoContent: ContentBlock[] = [
     examId: "exam_railway_group_d",
     contentType: "selection_process",
     body: "Computer based test\nPhysical efficiency test\nDocument verification",
+    createdAt: now,
+  },
+  {
+    id: "content_railway_group_d_regional_cutoff_archive",
+    examId: "exam_railway_group_d",
+    contentType: "regional_cutoff_archive",
+    body: JSON.stringify(rrbGroupDRegionalCutoffArchive),
     createdAt: now,
   },
   {

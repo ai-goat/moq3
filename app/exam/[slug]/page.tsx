@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { CutoffChart } from "@/components/ui/cutoff-chart";
+import { DataTable } from "@/components/ui/data-table";
 import { ProseBlock } from "@/components/ui/prose-block";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StatCard } from "@/components/ui/stat-card";
@@ -34,6 +35,39 @@ type FactItem = {
   label: string;
   value: string;
 };
+
+type ArchiveTable = {
+  rows: string[][];
+  title: string;
+};
+
+type ArchiveSection = {
+  description?: string;
+  tables: ArchiveTable[];
+  title: string;
+};
+
+type RegionalCutoffArchive = {
+  sections: ArchiveSection[];
+};
+
+function parseRegionalCutoffArchive(value: string): RegionalCutoffArchive | null {
+  if (!value) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(value) as RegionalCutoffArchive;
+
+    if (!Array.isArray(parsed.sections)) {
+      return null;
+    }
+
+    return parsed;
+  } catch {
+    return null;
+  }
+}
 
 function DenseFactTable({
   items,
@@ -297,6 +331,7 @@ function DefaultExamTemplate({
   selectionProcess,
   latestStat,
   cutoffTrend,
+  regionalCutoffArchive,
 }: {
   exam: Awaited<ReturnType<typeof getExamBySlug>> extends infer T
     ? NonNullable<T>
@@ -306,6 +341,7 @@ function DefaultExamTemplate({
   selectionProcess: string;
   latestStat: NonNullable<Awaited<ReturnType<typeof getExamBySlug>>>["stats"][number] | undefined;
   cutoffTrend: Array<{ year: number; value: number }>;
+  regionalCutoffArchive: RegionalCutoffArchive | null;
 }) {
   return (
     <div className="shell py-14">
@@ -429,6 +465,43 @@ function DefaultExamTemplate({
         )}
       </section>
 
+      {regionalCutoffArchive ? (
+        <section className="mt-16 grid gap-10">
+          <SectionHeading
+            description="Region-wise historical cutoff tables imported into MOQ3 in structured format for direct lookup."
+            eyebrow="Regional cutoffs"
+            title="Zone-wise cutoff archive"
+          />
+          <div className="grid gap-8">
+            {regionalCutoffArchive.sections.map((section) => (
+              <div className="grid gap-5" key={section.title}>
+                <div>
+                  <h2 className="text-2xl font-semibold text-slate-950">{section.title}</h2>
+                  {section.description ? (
+                    <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-600">
+                      {section.description}
+                    </p>
+                  ) : null}
+                </div>
+                <div className="grid gap-5 xl:grid-cols-2">
+                  {section.tables.map((table) => (
+                    <article className="card rounded-[2rem] p-6" key={table.title}>
+                      <h3 className="text-lg font-semibold text-slate-950">{table.title}</h3>
+                      <div className="mt-4">
+                        <DataTable
+                          columns={table.rows[0] ?? []}
+                          rows={(table.rows.slice(1) ?? []).map((row) => row)}
+                        />
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section className="mt-16 card rounded-[2rem] p-8">
         <SectionHeading
           description="Predictions combine historical cutoffs, candidate pressure, and vacancy stability."
@@ -490,6 +563,9 @@ export default async function ExamPage({
   const ageLimit = getExamContent(exam, "age_limit");
   const vacancyDetails = getExamContent(exam, "vacancy_details");
   const howToCheckAnswerKey = getExamContent(exam, "how_to_check_answer_key");
+  const regionalCutoffArchive = parseRegionalCutoffArchive(
+    getExamContent(exam, "regional_cutoff_archive"),
+  );
   const latestStat = exam.stats[0];
   const updates = getExamUpdates(exam);
   const cutoffTrend = getNormalizedCutoffHistory(exam, "General").map((item) => ({
@@ -519,12 +595,13 @@ export default async function ExamPage({
   }
 
   return (
-    <DefaultExamTemplate
+      <DefaultExamTemplate
       cutoffTrend={cutoffTrend}
       exam={exam}
       latestStat={latestStat}
       overview={overview}
       prediction={prediction}
+      regionalCutoffArchive={regionalCutoffArchive}
       selectionProcess={selectionProcess}
     />
   );
