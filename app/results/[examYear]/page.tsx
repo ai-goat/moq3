@@ -9,6 +9,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { StatCard } from "@/components/ui/stat-card";
 import { StructuredData } from "@/components/ui/structured-data";
 import { buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   average,
   buildIntentPageHref,
@@ -37,13 +38,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
-    alternates: {
-      canonical: buildIntentPageHref("result", data.exam.slug, data.result.year),
-    },
+  return buildPageMetadata({
     title: `${data.exam.name} ${data.result.year} Result`,
     description: `${data.exam.name} ${data.result.year} result date, cutoff comparison, selection statistics, and official result link.`,
-  };
+    canonical: buildIntentPageHref("result", data.exam.slug, data.result.year),
+  });
 }
 
 export default async function ResultPage({

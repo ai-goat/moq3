@@ -13,6 +13,7 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
+    "audit:site": "tsx scripts/site-audit.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {

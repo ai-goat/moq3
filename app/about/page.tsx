@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "About MOQ3",
   description:
-    "Learn how MOQ3 organizes exam results, cutoff intelligence, and exam updates for faster discovery.",
-  alternates: {
-    canonical: "/about",
-  },
-};
+    "Learn how MOQ3 organizes exam results, cutoff intelligence, answer keys, and official updates for faster and clearer discovery.",
+  canonical: "/about",
+});
 
 export default function AboutPage() {
   return (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CutoffIntentPage } from "@/components/exams/intent-page-shell";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   getCutoffIntentPageData,
   getStaticCollections,
@@ -26,13 +27,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: `${data.exam.name} Cutoff ${data.year}`,
-    description: `${data.exam.name} cutoff ${data.year} with category-wise marks and previous-year trend.`,
-    alternates: {
-      canonical: `/cutoff/${pageSlug}`,
-    },
-  };
+    description: `${data.exam.name} cutoff ${data.year} with category-wise marks, previous-year trend, and cutoff table.`,
+    canonical: `/cutoff/${pageSlug}`,
+  });
 }
 
 export default async function CutoffIntentRoute({

@@ -145,14 +145,28 @@ export function UpdateIntentPage({
         ""
       : `Visit the official portal, open the ${toTitleCase(pageType)} section, sign in using your exam credentials if required, and download the document.`;
 
+  const hasResult = exam.results.some((item) => item.year === year);
+  const hasCutoff = exam.cutoffs.some((item) => item.year === year);
   const internalLinks = [
+    ...(hasResult
+      ? [
+          {
+            href: buildIntentPageHref("result", exam.slug, year),
+            label: `${exam.name} Result ${year}`,
+          },
+        ]
+      : []),
+    ...(hasCutoff
+      ? [
+          {
+            href: buildIntentPageHref("cutoff", exam.slug, year),
+            label: `${exam.name} Cutoff ${year}`,
+          },
+        ]
+      : []),
     {
-      href: buildIntentPageHref("result", exam.slug, year),
-      label: `${exam.name} Result ${year}`,
-    },
-    {
-      href: buildIntentPageHref("cutoff", exam.slug, year),
-      label: `${exam.name} Cutoff ${year}`,
+      href: `/exam/${exam.slug}`,
+      label: `${exam.name} Overview`,
     },
     {
       href: update.officialLink,
@@ -298,7 +312,14 @@ export function ResultIntentPage({
         <LinkPanel
           links={[
             { href: result.officialResultLink, label: "Official Result Link" },
-            { href: buildIntentPageHref("cutoff", exam.slug, year), label: `${exam.name} Cutoff ${year}` },
+            ...(exam.cutoffs.some((item) => item.year === year)
+              ? [
+                  {
+                    href: buildIntentPageHref("cutoff", exam.slug, year),
+                    label: `${exam.name} Cutoff ${year}`,
+                  },
+                ]
+              : []),
             { href: `/exam/${exam.slug}`, label: `${exam.name} Overview` },
           ]}
         />
@@ -312,21 +333,33 @@ export function ResultIntentPage({
         />
       </div>
 
-      <section className="mt-6 rounded-md border border-stone-400 bg-white p-4">
-        <div className="bg-[#7b1238] px-4 py-3 text-center text-xl font-bold text-white">
-          Previous Year Cutoff Comparison
-        </div>
-        <div className="mt-4">
-          <DataTable
-            columns={["Category", `${year - 1}`, `${year}`]}
-            rows={currentCutoff.map((item) => [
-              item.category,
-              previousCutoff.find((row) => row.category === item.category)?.cutoffMarks ?? "-",
-              item.cutoffMarks,
-            ])}
-          />
-        </div>
-      </section>
+      {currentCutoff.length > 0 ? (
+        <section className="mt-6 rounded-md border border-stone-400 bg-white p-4">
+          <div className="bg-[#7b1238] px-4 py-3 text-center text-xl font-bold text-white">
+            Previous Year Cutoff Comparison
+          </div>
+          <div className="mt-4">
+            <DataTable
+              columns={["Category", `${year - 1}`, `${year}`]}
+              rows={currentCutoff.map((item) => [
+                item.category,
+                previousCutoff.find((row) => row.category === item.category)?.cutoffMarks ?? "-",
+                item.cutoffMarks,
+              ])}
+            />
+          </div>
+        </section>
+      ) : (
+        <section className="mt-6 rounded-md border border-stone-400 bg-white p-4">
+          <div className="bg-[#7b1238] px-4 py-3 text-center text-xl font-bold text-white">
+            Cutoff Update
+          </div>
+          <p className="mt-4 text-sm leading-7 text-stone-700">
+            This exam does not publish category-wise cutoffs. Official result
+            updates and scorecards are provided through the exam board portals.
+          </p>
+        </section>
+      )}
     </div>
   );
 }

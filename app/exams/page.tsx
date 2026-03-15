@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 import { buildIntentPageHref, formatNumber } from "@/lib/utils";
 import { getExamDirectory } from "@/services/public";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "All Exams",
-  description: "Explore all tracked exams, results, cutoffs, and analysis pages.",
-  alternates: {
-    canonical: "/exams",
-  },
-};
+  description:
+    "Explore all tracked exams with result timelines, cutoff history, official links, and analysis pages across major exam ecosystems.",
+  canonical: "/exams",
+});
 
 export const revalidate = 3600;
 

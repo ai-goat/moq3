@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Terms of Use",
-  description: "Terms governing use of MOQ3 result intelligence pages.",
-  alternates: {
-    canonical: "/terms",
-  },
-};
+  description:
+    "Terms governing the use of MOQ3 result intelligence pages, official links, and exam update content.",
+  canonical: "/terms",
+});
 
 export default function TermsPage() {
   return (

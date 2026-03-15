@@ -3,16 +3,16 @@ import Link from "next/link";
 
 import { ResultStatusPill } from "@/components/ui/result-status-pill";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 import { buildIntentPageHref, formatDate } from "@/lib/utils";
 import { getExamCalendarData } from "@/services/public";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Exam Calendar",
-  description: "Upcoming result declaration calendar for tracked exams.",
-  alternates: {
-    canonical: "/exam-calendar",
-  },
-};
+  description:
+    "Upcoming result declaration calendar with official timelines and expected windows for SSC, UPSC, Railway, CBSE, and other exams.",
+  canonical: "/exam-calendar",
+});
 
 export const revalidate = 3600;
 

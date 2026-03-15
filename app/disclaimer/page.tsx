@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Disclaimer",
-  description: "Accuracy and official verification disclaimer for MOQ3.",
-  alternates: {
-    canonical: "/disclaimer",
-  },
-};
+  description:
+    "Accuracy and official verification disclaimer for MOQ3 exam result and cutoff information.",
+  canonical: "/disclaimer",
+});
 
 export default function DisclaimerPage() {
   return (

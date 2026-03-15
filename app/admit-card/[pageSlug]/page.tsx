@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { UpdateIntentPage } from "@/components/exams/intent-page-shell";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   getStaticCollections,
   getUpdateIntentPageData,
@@ -26,13 +27,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: `${data.exam.name} Admit Card ${data.year}`,
-    description: `${data.exam.name} admit card ${data.year} with important dates, official link, and exam-cycle details.`,
-    alternates: {
-      canonical: `/admit-card/${pageSlug}`,
-    },
-  };
+    description: `${data.exam.name} admit card ${data.year} with official download link, important dates, and exam-cycle details.`,
+    canonical: `/admit-card/${pageSlug}`,
+  });
 }
 
 export default async function AdmitCardIntentPage({

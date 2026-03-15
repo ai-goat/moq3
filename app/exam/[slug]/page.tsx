@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { StatCard } from "@/components/ui/stat-card";
 import { StructuredData } from "@/components/ui/structured-data";
 import { buildBreadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   formatCompactDate,
   formatDate,
@@ -17,6 +18,7 @@ import {
   parseKeyValueLines,
   safePercentage,
   splitParagraphs,
+  buildIntentPageHref,
   toTitleCase,
 } from "@/lib/utils";
 import {
@@ -332,6 +334,7 @@ function DefaultExamTemplate({
   latestStat,
   cutoffTrend,
   regionalCutoffArchive,
+  updateLinks,
 }: {
   exam: Awaited<ReturnType<typeof getExamBySlug>> extends infer T
     ? NonNullable<T>
@@ -342,6 +345,7 @@ function DefaultExamTemplate({
   latestStat: NonNullable<Awaited<ReturnType<typeof getExamBySlug>>>["stats"][number] | undefined;
   cutoffTrend: Array<{ year: number; value: number }>;
   regionalCutoffArchive: RegionalCutoffArchive | null;
+  updateLinks: Array<{ href: string; label: string }>;
 }) {
   return (
     <div className="shell py-14">
@@ -381,6 +385,12 @@ function DefaultExamTemplate({
               href={getCutoffCards(exam)[0]?.href ?? "/exams"}
             >
               Latest cutoff page
+            </Link>
+            <Link
+              className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700"
+              href={`/analysis/${exam.slug}`}
+            >
+              View analysis
             </Link>
           </div>
         </div>
@@ -426,6 +436,27 @@ function DefaultExamTemplate({
         </div>
       </section>
 
+      {updateLinks.length > 0 ? (
+        <section className="mt-12">
+          <SectionHeading
+            eyebrow="Latest updates"
+            title="Quick links for recent actions"
+            description="Direct links to the newest notices, admit cards, and answer keys for this exam."
+          />
+          <div className="mt-6 flex flex-wrap gap-3">
+            {updateLinks.map((link) => (
+              <Link
+                className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-sky-300 hover:bg-sky-50"
+                href={link.href}
+                key={link.href}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section className="mt-16 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <SectionHeading
@@ -436,7 +467,7 @@ function DefaultExamTemplate({
             {exam.results.map((result) => (
               <Link
                 className="card rounded-[2rem] p-5 transition hover:-translate-y-1"
-                href={`/results/${exam.slug}-${result.year}`}
+                href={`/result/${exam.slug}-${result.year}`}
                 key={result.id}
               >
                 <p className="text-lg font-semibold text-slate-950">
@@ -534,11 +565,11 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${exam.name} Result, Cutoff, Analysis`,
-    description: exam.description,
-    alternates: {
+    ...buildPageMetadata({
+      title: `${exam.name} Result, Cutoff, Analysis`,
+      description: `${exam.description} Find official links, result timelines, cutoff trends, and exam updates in one place.`,
       canonical: `/exam/${exam.slug}`,
-    },
+    }),
   };
 }
 
@@ -573,6 +604,18 @@ export default async function ExamPage({
     value: item.cutoffMarks,
   }));
 
+  const updateLinks = updates
+    .filter((update) =>
+      ["notification", "admit-card", "answer-key", "result", "cutoff"].includes(
+        update.updateType,
+      ),
+    )
+    .slice(0, 6)
+    .map((update) => ({
+      href: buildIntentPageHref(update.updateType, exam.slug, update.year),
+      label: `${toTitleCase(update.updateType)} ${update.year}`,
+    }));
+
   const shouldUseDenseUpdateTemplate = Boolean(
     importantDates && (applicationFee || vacancyDetails || updates.length > 0),
   );
@@ -603,6 +646,7 @@ export default async function ExamPage({
       prediction={prediction}
       regionalCutoffArchive={regionalCutoffArchive}
       selectionProcess={selectionProcess}
+      updateLinks={updateLinks}
     />
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { UpdateIntentPage } from "@/components/exams/intent-page-shell";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   getStaticCollections,
   getUpdateIntentPageData,
@@ -26,13 +27,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: `${data.exam.name} Answer Key ${data.year}`,
-    description: `${data.exam.name} answer key ${data.year} with direct official link, dates, and how to check details.`,
-    alternates: {
-      canonical: `/answer-key/${pageSlug}`,
-    },
-  };
+    description: `${data.exam.name} answer key ${data.year} with official link, release date, and step-by-step download guidance.`,
+    canonical: `/answer-key/${pageSlug}`,
+  });
 }
 
 export default async function AnswerKeyIntentPage({

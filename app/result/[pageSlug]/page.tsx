@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ResultIntentPage } from "@/components/exams/intent-page-shell";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   getResultIntentPageData,
   getStaticCollections,
@@ -26,13 +27,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: `${data.exam.name} Result ${data.year}`,
-    description: `${data.exam.name} result ${data.year} with direct link, result date, selection stats, and cutoff comparison.`,
-    alternates: {
-      canonical: `/result/${pageSlug}`,
-    },
-  };
+    description: `${data.exam.name} result ${data.year} with official link, declared date, selection stats, and cutoff comparison.`,
+    canonical: `/result/${pageSlug}`,
+  });
 }
 
 export default async function ResultIntentRoute({

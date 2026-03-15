@@ -7,6 +7,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StructuredData } from "@/components/ui/structured-data";
 import { buildBreadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
 import { formatNumber, safePercentage } from "@/lib/utils";
 import { getAnalysisPageData, getStaticCollections } from "@/services/public";
 
@@ -29,13 +30,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: `${data.exam.name} Analysis`,
-    description: `${data.exam.name} selection ratio, marks vs rank, historical results, and cutoff analytics.`,
-    alternates: {
-      canonical: `/analysis/${data.exam.slug}`,
-    },
-  };
+    description: `${data.exam.name} selection ratio, marks vs rank, historical results, and cutoff analytics for recent exam cycles.`,
+    canonical: `/analysis/${data.exam.slug}`,
+  });
 }
 
 export default async function AnalysisPage({

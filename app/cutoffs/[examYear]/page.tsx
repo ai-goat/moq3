@@ -8,6 +8,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StructuredData } from "@/components/ui/structured-data";
 import { buildBreadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
 import { buildIntentPageHref, slugifyCategory } from "@/lib/utils";
 import { getCutoffPageData, getStaticCollections } from "@/services/public";
 
@@ -30,13 +31,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
-    alternates: {
-      canonical: buildIntentPageHref("cutoff", data.exam.slug, data.year),
-    },
+  return buildPageMetadata({
     title: `${data.exam.name} ${data.year} Cutoff`,
     description: `${data.exam.name} ${data.year} cutoff table with category-wise marks and previous year graphs.`,
-  };
+    canonical: buildIntentPageHref("cutoff", data.exam.slug, data.year),
+  });
 }
 
 export default async function CutoffPage({

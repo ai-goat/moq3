@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Privacy Policy",
-  description: "How MOQ3 handles data, analytics, and privacy protections.",
-  alternates: {
-    canonical: "/privacy-policy",
-  },
-};
+  description:
+    "How MOQ3 handles data, analytics, and privacy protections for exam result and cutoff tracking pages.",
+  canonical: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (

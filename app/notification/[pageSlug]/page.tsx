@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { UpdateIntentPage } from "@/components/exams/intent-page-shell";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   getStaticCollections,
   getUpdateIntentPageData,
@@ -26,13 +27,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: `${data.exam.name} Notification ${data.year}`,
     description: `${data.exam.name} notification ${data.year} with important dates, fee, eligibility, vacancy, and official links.`,
-    alternates: {
-      canonical: `/notification/${pageSlug}`,
-    },
-  };
+    canonical: `/notification/${pageSlug}`,
+  });
 }
 
 export default async function NotificationIntentPage({

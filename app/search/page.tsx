@@ -3,15 +3,15 @@ import Link from "next/link";
 
 import { SearchBox } from "@/components/search/search-box";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 import { getHomepageData } from "@/services/public";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Search Exams",
-  description: "Instant exam search backed by Meilisearch with fallback search support.",
-  alternates: {
-    canonical: "/search",
-  },
-};
+  description:
+    "Search for exam result pages, cutoff updates, answer keys, and notifications with fast keyword matching across the MOQ3 index.",
+  canonical: "/search",
+});
 
 export const revalidate = 3600;
 

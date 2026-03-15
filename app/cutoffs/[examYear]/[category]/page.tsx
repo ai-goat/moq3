@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { StatCard } from "@/components/ui/stat-card";
 import { StructuredData } from "@/components/ui/structured-data";
 import { buildBreadcrumbJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
 import { getCutoffCategoryPageData, getStaticCollections } from "@/services/public";
 
 export const revalidate = 3600;
@@ -28,13 +29,11 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: `${data.exam.name} ${data.year} ${data.category} Cutoff`,
-    description: `${data.exam.name} ${data.year} ${data.category} cutoff with historical year comparison.`,
-    alternates: {
-      canonical: `/cutoffs/${examYear}/${category}`,
-    },
-  };
+    description: `${data.exam.name} ${data.year} ${data.category} cutoff with historical year comparison and zone trends.`,
+    canonical: `/cutoffs/${examYear}/${category}`,
+  });
 }
 
 export default async function CutoffCategoryPage({

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Contact MOQ3",
-  description: "Get in touch with MOQ3 for corrections, partnerships, or support.",
-  alternates: {
-    canonical: "/contact",
-  },
-};
+  description:
+    "Contact MOQ3 for corrections, official link updates, partnerships, and exam data feedback.",
+  canonical: "/contact",
+});
 
 export default function ContactPage() {
   return (

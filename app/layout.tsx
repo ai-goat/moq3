@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: SITE_TITLE,
     type: "website",
-    url: env.siteUrl,
   },
   twitter: {
     card: "summary_large_image",

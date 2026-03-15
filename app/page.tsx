@@ -7,14 +7,16 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { StatCard } from "@/components/ui/stat-card";
 import { StructuredData } from "@/components/ui/structured-data";
 import { buildOrganizationJsonLd } from "@/lib/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
 import { buildIntentPageHref, formatCompactDate, formatNumber } from "@/lib/utils";
 import { getHomepageData } from "@/services/public";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "MOQ3 - Result Intelligence Platform",
+  description:
+    "Official exam result timelines, cutoff analysis, and high-intent updates across SSC, UPSC, Railway, CBSE, and other competitive exams.",
+  canonical: "/",
+});
 
 export default async function HomePage() {
   const data = await getHomepageData();
@@ -205,6 +207,31 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="shell grid gap-6 py-10">
+        <SectionHeading
+          description="Deep-dive analytics pages for marks vs rank, selection ratios, and year-wise signals."
+          eyebrow="Exam insights"
+          title="Trending analysis pages"
+        />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {data.exams.slice(0, 6).map((exam) => (
+            <Link
+              className="card rounded-[2rem] p-5 transition hover:-translate-y-1"
+              href={`/analysis/${exam.slug}`}
+              key={`analysis-${exam.slug}`}
+            >
+              <p className="text-sm font-medium text-slate-500">Analysis</p>
+              <p className="mt-3 text-lg font-semibold text-slate-950">
+                {exam.name} insights
+              </p>
+              <p className="mt-2 text-sm text-slate-500">
+                Selection ratio, cutoff trend, marks vs rank.
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
     </div>
