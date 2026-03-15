@@ -1,7 +1,7 @@
 {
   "baseUrl": "https://www.moq3.com",
   "sitemapUrl": "https://www.moq3.com/sitemap.xml",
-  "fetchedAt": "2026-03-15T18:52:06.373Z",
+  "fetchedAt": "2026-03-15T19:20:15.008Z",
   "totals": {
     "urls": 96,
     "ok": 96,
@@ -395,31 +395,6 @@
       "status": 200
     }
   ],
-  "brokenInternalLinks": [
-    {
-      "url": "https://www.moq3.com/cutoff/cbse-class-12-2026",
-      "status": 404
-    },
-    {
-      "url": "https://www.moq3.com/cutoff/cbse-class-12-2025",
-      "status": 404
-    },
-    {
-      "url": "https://www.moq3.com/result/ssc-mts-havaldar-2026",
-      "status": 404
-    },
-    {
-      "url": "https://www.moq3.com/cutoff/ssc-mts-havaldar-2026",
-      "status": 404
-    },
-    {
-      "url": "https://www.moq3.com/result/ssc-mts-havaldar-2025",
-      "status": 404
-    },
-    {
-      "url": "https://www.moq3.com/cutoff/ssc-mts-havaldar-2025",
-      "status": 404
-    }
-  ],
-  "internalLinkCount": 131
+  "brokenInternalLinks": [],
+  "internalLinkCount": 112
 }
