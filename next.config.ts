@@ -13,11 +13,6 @@ const nextConfig: NextConfig = {
         destination: "/result/:examYear",
         permanent: true,
       },
-      {
-        source: "/cutoffs/:examYear",
-        destination: "/cutoff/:examYear",
-        permanent: true,
-      },
     ];
   },
   async headers() {

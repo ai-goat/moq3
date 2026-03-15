@@ -24,7 +24,8 @@ export function revalidatePlatformRoutes(examSlug?: string, year?: number) {
   }
 
   const examYear = buildExamYearSlug(examSlug, year);
-  revalidatePath(`/results/${examYear}`);
+  revalidatePath(`/result/${examYear}`);
+  revalidatePath(`/cutoff/${examYear}`);
   revalidatePath(`/cutoffs/${examYear}`);
   revalidatePath(`/${examSlug}-result-${year}`);
   revalidatePath(`/${examSlug}-cutoff-${year}`);
