@@ -12,6 +12,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/exams",
     "/exam-calendar",
     "/search",
+    "/about",
+    "/contact",
+    "/privacy-policy",
+    "/terms",
+    "/disclaimer",
   ].map((route) => ({
     url: `${base}${route || "/"}`,
     changeFrequency: "daily" as const,

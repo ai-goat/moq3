@@ -8,10 +8,14 @@ export function SiteFooter() {
           <p className="font-semibold text-slate-950">MOQ3</p>
           <p>SEO-first result intelligence for high-volume exam pages.</p>
         </div>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
+          <Link href="/privacy-policy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/disclaimer">Disclaimer</Link>
           <Link href="/sitemap.xml">Sitemap</Link>
           <Link href="/robots.txt">Robots</Link>
-          <Link href="/admin">Admin</Link>
         </div>
       </div>
     </footer>
