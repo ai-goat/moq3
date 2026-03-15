@@ -9,6 +9,7 @@ export function SiteFooter() {
           <p>SEO-first result intelligence for high-volume exam pages.</p>
         </div>
         <div className="flex flex-wrap gap-4">
+          <Link href="/news">News</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/privacy-policy">Privacy</Link>

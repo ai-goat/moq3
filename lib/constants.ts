@@ -10,6 +10,7 @@ export const NAV_ITEMS = [
   { href: "/exams", label: "Exams" },
   { href: "/exam-calendar", label: "Calendar" },
   { href: "/search", label: "Search" },
+  { href: "/news", label: "News" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

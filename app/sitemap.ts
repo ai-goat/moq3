@@ -12,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/exams",
     "/exam-calendar",
     "/search",
+    "/news",
     "/about",
     "/contact",
     "/privacy-policy",
@@ -71,6 +72,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  const newsRoutes = [
+    {
+      url: `${base}/news/anuj-agnihotri-upsc-2025-marksheet`,
+      changeFrequency: "daily" as const,
+      priority: 0.95,
+    },
+  ];
+
   return [
     ...staticRoutes,
     ...examRoutes,
@@ -81,5 +90,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...notificationRoutes,
     ...cutoffCategoryRoutes,
     ...analysisRoutes,
+    ...newsRoutes,
   ];
 }

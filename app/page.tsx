@@ -105,6 +105,32 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="shell grid gap-8 py-10">
+        <SectionHeading
+          description="Fast status updates with official links and short summaries."
+          eyebrow="News update"
+          title="UPSC 2025 marksheet status"
+        />
+        <Link
+          className="card rounded-[2rem] p-6 transition hover:-translate-y-1"
+          href="/news/anuj-agnihotri-upsc-2025-marksheet"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-sm font-medium text-slate-500">UPSC 2025</p>
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+              Live status
+            </span>
+          </div>
+          <p className="mt-3 text-xl font-semibold text-slate-950">
+            Anuj Agnihotri UPSC 2025 marksheet breakdown & optional subject score
+          </p>
+          <p className="mt-2 text-sm leading-7 text-slate-500">
+            Reported marks totals, official UPSC links, and how to check optional
+            subject scores once the marksheet is released.
+          </p>
+        </Link>
+      </section>
+
       <section className="shell grid gap-8 py-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="grid gap-5">
           <SectionHeading
