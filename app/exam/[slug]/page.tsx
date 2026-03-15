@@ -375,19 +375,19 @@ function DefaultExamTemplate({
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
+              className="rounded-full btn-primary px-5 py-3 text-sm font-semibold"
               href={getResultCards(exam)[0]?.href ?? "/exams"}
             >
               Latest result page
             </Link>
             <Link
-              className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700"
+              className="rounded-full btn-secondary px-5 py-3 text-sm font-semibold"
               href={getCutoffCards(exam)[0]?.href ?? "/exams"}
             >
               Latest cutoff page
             </Link>
             <Link
-              className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700"
+              className="rounded-full btn-secondary px-5 py-3 text-sm font-semibold"
               href={`/analysis/${exam.slug}`}
             >
               View analysis

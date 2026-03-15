@@ -55,7 +55,7 @@ export default async function AdminPage({
               </label>
             </div>
             <button
-              className="mt-6 rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
+              className="mt-6 rounded-2xl btn-primary px-5 py-3 text-sm font-semibold"
               type="submit"
             >
               Sign in

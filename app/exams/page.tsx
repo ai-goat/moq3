@@ -36,7 +36,7 @@ export default async function ExamsPage() {
                 </h2>
               </div>
               <Link
-                className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white"
+                className="rounded-full btn-primary px-4 py-2 text-sm font-semibold"
                 href={`/exam/${exam.slug}`}
               >
                 Open

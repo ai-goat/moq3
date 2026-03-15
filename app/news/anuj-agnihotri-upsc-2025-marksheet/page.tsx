@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { DataTable } from "@/components/ui/data-table";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StructuredData } from "@/components/ui/structured-data";
 import { buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/json-ld";
@@ -14,12 +15,30 @@ export const revalidate = 1800;
 const PAGE_TITLE =
   "Anuj Agnihotri UPSC 2025 Marksheet Breakdown & Optional Subject Score";
 const PAGE_SLUG = "/news/anuj-agnihotri-upsc-2025-marksheet";
+const SOURCE_UPDATE_DATE = "12 Mar 2026";
+
+const marksBreakdown = [
+  ["Essay (Paper I)", 108],
+  ["General Studies I (Paper II)", 111],
+  ["General Studies II (Paper III)", 127],
+  ["General Studies III (Paper IV)", 103],
+  ["General Studies IV (Paper V)", 126],
+  ["Optional I: Medical Science (Paper VI)", 142],
+  ["Optional II: Medical Science (Paper VII)", 150],
+];
+
+const totals = [
+  ["Written total", 867],
+  ["Interview", 204],
+  ["Final total", 1071],
+];
 
 export const metadata: Metadata = buildPageMetadata({
   title: PAGE_TITLE,
   description:
     "Live status on UPSC 2025 marksheet release, reported marks totals, and how to check optional subject score on the official UPSC marksheet portal.",
   canonical: PAGE_SLUG,
+  image: "/images/scorecard-hero.svg",
 });
 
 const faq = [
@@ -81,9 +100,14 @@ export default function AnujAgnihotriUPSCMarksheetPage() {
             total marks, and where to check the optional subject score once the
             official scorecard is available.
           </p>
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            Reported marks breakdown is based on PW Live coverage. Official
+            confirmation arrives only when UPSC publishes the marksheet or marks
+            PDF.
+          </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
+              className="rounded-full btn-primary px-5 py-3 text-sm font-semibold"
               href="https://upsconline.gov.in/marksheet/exam/marksheet_system/archives.php"
               rel="noreferrer"
               target="_blank"
@@ -91,7 +115,7 @@ export default function AnujAgnihotriUPSCMarksheetPage() {
               UPSC marksheet portal
             </Link>
             <Link
-              className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700"
+              className="rounded-full btn-secondary px-5 py-3 text-sm font-semibold"
               href="https://upsc.gov.in/examinations/marks-recommended-candidates/archives"
               rel="noreferrer"
               target="_blank"
@@ -124,26 +148,25 @@ export default function AnujAgnihotriUPSCMarksheetPage() {
         <div className="card rounded-[2rem] p-8">
           <SectionHeading
             eyebrow="Reported marks"
-            title="Anuj Agnihotri reported total marks (news)"
-            description="These numbers are reported by national news outlets and will be confirmed once UPSC publishes the marksheet."
+            title="UPSC 2025 marksheet breakdown (reported)"
+            description="Marks split reported by PW Live; UPSC marksheet will provide final confirmation."
           />
+          <div className="mt-6">
+            <DataTable columns={["Paper", "Marks"]} rows={marksBreakdown} />
+          </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border border-slate-100 p-4">
-              <p className="text-sm text-slate-500">Total marks</p>
-              <p className="mt-2 text-3xl font-semibold text-slate-950">1071</p>
-            </div>
-            <div className="rounded-2xl border border-slate-100 p-4">
-              <p className="text-sm text-slate-500">Written (Mains)</p>
-              <p className="mt-2 text-3xl font-semibold text-slate-950">867</p>
-            </div>
-            <div className="rounded-2xl border border-slate-100 p-4">
-              <p className="text-sm text-slate-500">Interview</p>
-              <p className="mt-2 text-3xl font-semibold text-slate-950">204</p>
-            </div>
+            {totals.map((row) => (
+              <div className="rounded-2xl border border-slate-100 p-4" key={row[0]}>
+                <p className="text-sm text-slate-500">{row[0]}</p>
+                <p className="mt-2 text-3xl font-semibold text-slate-950">
+                  {row[1]}
+                </p>
+              </div>
+            ))}
           </div>
           <p className="mt-5 text-sm leading-7 text-slate-500">
-            Source: NDTV Profit (reported totals and the written/interview split;
-            detailed scorecard release noted as forthcoming).
+            Source update date: {SOURCE_UPDATE_DATE}. Optional subject reported
+            as Medical Science.
           </p>
         </div>
 
@@ -269,11 +292,11 @@ export default function AnujAgnihotriUPSCMarksheetPage() {
           </Link>
           <Link
             className="rounded-2xl border border-slate-100 px-4 py-3 transition hover:border-sky-200 hover:bg-sky-50"
-            href="https://www.ndtvprofit.com/education/upsc-result-2025-anuj-agnihotri-tops-civil-services-exam-scores-1071-marks"
+            href="https://www.pw.live/upsc/exams/anuj-agnihotri-marksheet"
             rel="noreferrer"
             target="_blank"
           >
-            NDTV Profit coverage (reported marks totals)
+            PW Live marksheet breakdown (reported)
           </Link>
         </div>
       </section>

@@ -60,6 +60,26 @@ a {
   letter-spacing: -0.04em;
 }
 
+.btn-primary {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.btn-primary:hover {
+  background: #111827;
+}
+
+.btn-secondary {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.btn-secondary:hover {
+  border-color: #bae6fd;
+  background: #f0f9ff;
+}
+
 .prose-copy p + p {
   margin-top: 0.9rem;
 }

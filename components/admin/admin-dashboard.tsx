@@ -85,7 +85,7 @@ export function AdminDashboard() {
             </p>
           </div>
           <button
-            className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="rounded-2xl btn-primary px-5 py-3 text-sm font-semibold transition"
             onClick={reindex}
             type="button"
           >

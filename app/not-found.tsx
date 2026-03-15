@@ -13,13 +13,13 @@ export default function NotFound() {
         </p>
         <div className="mt-8 flex justify-center gap-3">
           <Link
-            className="rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white"
+            className="rounded-full btn-primary px-5 py-3 text-sm font-semibold"
             href="/"
           >
             Return home
           </Link>
           <Link
-            className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700"
+            className="rounded-full btn-secondary px-5 py-3 text-sm font-semibold"
             href="/exams"
           >
             Browse exams
